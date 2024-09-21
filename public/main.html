@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple To-Do List</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    background-image: url('https://img.freepik.com/premium-photo/list-icon-notebook-with-completed-todo-list-3d-render_471402-428.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+header {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+main {
+    padding: 1rem;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background: #333;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #555;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: white;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+li.completed {
+    text-decoration: line-through;
+    color: #999;
+}
+
+li button {
+    background: red;
+    border: none;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+li button:hover {
+    background: darkred;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My To-Do List</h1>
+    </header>
+    <main>
+        <form id="todo-form">
+            <input type="text" id="new-task" placeholder="Enter a new task" required>
+            <button type="submit">Add Task</button>
+        </form>
+        <ul id="task-list">
+            <!-- Tasks will be added here -->
+        </ul>
+    </main>
+    <script>document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('todo-form');
+        const taskList = document.getElementById('task-list');
+    
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newTask = document.getElementById('new-task').value;
+            addTask(newTask);
+            form.reset();
+        });
+    
+        function addTask(task) {
+            const li = document.createElement('li');
+            li.textContent = task;
+            
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => {
+                taskList.removeChild(li);
+            });
+            
+            li.appendChild(deleteButton);
+            taskList.appendChild(li);
+    
+            li.addEventListener('click', () => {
+                li.classList.toggle('completed');
+            });
+        }
+    });
+     </script>
+</body>
+</html> 
